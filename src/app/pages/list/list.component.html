@@ -1,0 +1,9 @@
+<div class="todo-list" *ngIf="todoList$ | async as todoList; else noItems">
+  <h1>Tasks</h1>
+  <ul>
+    <li *ngFor="let item of todoList">{{item.task}}</li>
+  </ul>
+</div>
+<ng-template #noItems>
+  No Items yet, add one pressing the button above
+</ng-template>
