@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
-import { ITodoItem } from 'src/app/interfaces';
+import { Router } from '@angular/router';
+import { DataCentralService } from 'src/app/providers/core/data-central.service';
 
 @Component({
   selector: 'app-add-task',
@@ -13,9 +14,8 @@ export class AddTaskComponent implements OnInit {
     task: ['', [Validators.required, Validators.minLength(3)]]
   });
 
-  public todoList: ITodoItem[] = [];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private _central: DataCentralService, private router: Router) {}
 
   ngOnInit(): void {
 
@@ -25,16 +25,22 @@ export class AddTaskComponent implements OnInit {
     const task = this.task?.value;
     const id = this.getId();
 
-    this.todoList.push({task, id});
+    this._central.newTask = {task, id};
     this.addTaskForm.reset();
+    this.navigateHome()
   }
 
   private getId() {
-    return this.todoList.length + 1;
+    return this._central.tasksAmount + 1;
+  }
+
+  private navigateHome() {
+    this.router.navigate(['']);
   }
 
   public get task() {
     return this.addTaskForm.get('task');
   }
+
 
 }
