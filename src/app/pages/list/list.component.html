@@ -1,7 +1,10 @@
 <div class="todo-list" *ngIf="todoList$ | async as todoList; else noItems">
   <h1>Tasks</h1>
   <ul>
-    <li *ngFor="let item of todoList">{{item.task}}</li>
+    <li *ngFor="let item of todoList">{{item.task}}
+      <button [routerLink]="['/add-task', item.id]">Edit</button>
+      <button (click)="removeTask(item.id)">Delete</button>
+    </li>
   </ul>
 </div>
 <ng-template #noItems>

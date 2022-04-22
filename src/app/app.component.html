@@ -1,7 +1,7 @@
 <nav>
   <button routerLink="/list">Back</button>
   <h1>SW TODO</h1>
-  <button routerLink="/add-task" >Add new Task</button>
+  <button routerLink="/add-task" routerLinkActive #rla="routerLinkActive" [disabled]="rla.isActive" >Add new Task</button>
 </nav>
 
 <div class="container">

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: AddTaskComponent
+  },
+  {
+    path: ':id',
+    component: AddTaskComponent
   }
 ];
 

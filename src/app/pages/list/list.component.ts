@@ -17,4 +17,8 @@ export class ListComponent implements OnInit {
     this.todoList$ = this._central.tasks$;
   }
 
+  public removeTask(id: number) {
+    this._central.deleteTask(id);
+  }
+
 }
