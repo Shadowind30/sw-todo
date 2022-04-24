@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITodoItem } from 'src/app/models.interface';
+import { ITodoItem, ITodoList } from 'src/app/models.interface';
 import { DataCentralService } from 'src/app/providers/core/data-central.service';
 
 @Component({
@@ -10,15 +10,18 @@ import { DataCentralService } from 'src/app/providers/core/data-central.service'
 })
 export class ListComponent implements OnInit {
 
-  public todoList$: Observable<ITodoItem[]> = new Observable();
+  @Input() public todoList: ITodoList = {
+    id: 0,
+    items: [],
+    name: 'Unnamed'
+  };
+
   constructor(private _central: DataCentralService) { }
 
-  ngOnInit(): void {
-    this.todoList$ = this._central.tasks$;
-  }
+  ngOnInit(): void {}
 
   public removeTask(id: number) {
-    this._central.deleteTask(id);
+    this._central.deleteTask(id, this.todoList.id);
   }
 
 }

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListComponent } from './pages/list/list.component';
 
 const routes: Routes = [
   {
-    path: 'list',
-    loadChildren: () => import('./pages/list/list.module').then(m => m.ListModule)
+    path: 'board',
+    loadChildren: () => import('./pages/board/board.module').then(m => m.BoardModule)
   },
   {
     path: 'add-task',
@@ -14,7 +13,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'list'
+    redirectTo: 'board'
   },
   {
     path: '*',

@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
-import { ITodoItem } from 'src/app/models.interface';
+import { ITodoItem, ITodoList } from 'src/app/models.interface';
 import { LoggerService } from '../common/logger.service';
 
-export type DBKey = 'tasks';
-export type DBValue = ITodoItem[] | null;
+export type DBKey = 'todos';
+export type DBValue = ITodoList[] | null;
 const PREFIX = 'sw_todo_db/';
-const TASKS_KEY = 'tasks';
+const TODOS_KEY = 'todos';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LocalDbService {
   private readonly DB = localStorage;
-  private _tasks: ITodoItem[] = [];
+  private _todos: ITodoList[] = [];
 
   constructor(private _logger: LoggerService) {}
 
-  public get tasks() {
-    return this._tasks;
+  public get todos() {
+    return this._todos;
   }
 
-  public set updateTasks(value: ITodoItem[]) {
+  public set updateTodos(value: ITodoList[]) {
     if (!value || !value.length) {
-      this._logger.warn(`[DB] Called updateTasks with empty or falsy value, update wasn't made`);
+      this._logger.warn(`[DB] Called updateTodos with empty or falsy value, update wasn't made`);
       return;
     }
 
-    this.updateDB(TASKS_KEY, value);
-    this._tasks = value;
+    this.updateDB(TODOS_KEY, value);
+    this._todos = value;
   }
 
   /** Saves or update passed key with passed value, pass null to clear key */
@@ -45,10 +45,26 @@ export class LocalDbService {
 
   /** Loads everything stored on localStorage */
   public initDB() {
-    this._tasks =
+    this._todos =
       (JSON.parse(
-        this.DB.getItem(PREFIX + TASKS_KEY) as string
-      ) as ITodoItem[]) || [];
+        this.DB.getItem(PREFIX + TODOS_KEY) as string
+      ) as ITodoList[]) || [
+        {
+          id: 1,
+          items: [],
+          name: 'To Do'
+        },
+        {
+          id: 2,
+          items: [],
+          name: 'In progress'
+        },
+        {
+          id: 3,
+          items: [],
+          name: 'Done'
+        }
+      ];
   }
 
 }

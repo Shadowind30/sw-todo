@@ -1,0 +1,15 @@
+<div class="todo-container">
+  <h1>{{todoList.name}}</h1>
+  <button [routerLink]="['/add-task', todoList.id, 0]">Add new Task</button>
+  <div class="todo-list" *ngIf="todoList.items.length; else noItems">
+    <ul>
+      <li *ngFor="let item of todoList.items">{{item.task}}
+        <button [routerLink]="['/add-task', todoList.id, item.id]">Edit</button>
+        <button (click)="removeTask(item.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noItems>
+    No Items yet, add one pressing the button above
+  </ng-template>
+</div>

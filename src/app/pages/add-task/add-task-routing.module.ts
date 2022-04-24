@@ -9,7 +9,7 @@ const routes: Routes = [
     component: AddTaskComponent
   },
   {
-    path: ':id',
+    path: ':listId/:id',
     component: AddTaskComponent
   }
 ];

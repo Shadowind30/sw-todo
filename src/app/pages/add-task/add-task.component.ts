@@ -9,7 +9,9 @@ import { DataCentralService } from 'src/app/providers/core/data-central.service'
   styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent implements OnInit {
-  private id: number = 0;
+
+  private listId = 0;
+  private id = 0;
 
   public addTaskForm = this.fb.group({
     task: ['', [Validators.required, Validators.minLength(3)]],
@@ -23,10 +25,11 @@ export class AddTaskComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.listId = +this.route.snapshot.params['listId'] || 0;
     this.id = +this.route.snapshot.params['id'] || 0;
 
-    if (this.id > 0) {
-      const task = this._central.getTask(this.id).task;
+    if (this.listId > 0 && this.id > 0) {
+      const task = this._central.getTask(this.id, this.listId).task;
       this.task?.setValue(task);
     }
   }
@@ -39,7 +42,7 @@ export class AddTaskComponent implements OnInit {
     const task = this.task?.value;
     const id = this.getId();
 
-    this._central.addTask({ task, id });
+    this._central.addTask({ task, id }, this.listId);
     this.addTaskForm.reset();
     this.navigateHome();
   }
@@ -48,13 +51,13 @@ export class AddTaskComponent implements OnInit {
     const task = this.task?.value;
     const id = this.id;
 
-    this._central.updateTask({ task, id });
+    this._central.updateTask({ task, id }, this.listId);
     this.addTaskForm.reset();
     this.navigateHome();
   }
 
   private getId() {
-    return this._central.tasksAmount + 1;
+    return this._central.getTasksAmount(this.listId) + 1;
   }
 
   private navigateHome() {
@@ -64,9 +67,4 @@ export class AddTaskComponent implements OnInit {
   public get task() {
     return this.addTaskForm.get('task');
   }
-}
-function take(
-  arg0: number
-): import('rxjs').OperatorFunction<import('@angular/router').Params, unknown> {
-  throw new Error('Function not implemented.');
 }

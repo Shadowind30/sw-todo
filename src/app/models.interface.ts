@@ -3,3 +3,8 @@ export interface ITodoItem {
   task: string;
 }
 
+export interface ITodoList {
+  id: number;
+  items: ITodoItem[];
+  name: string;
+}
