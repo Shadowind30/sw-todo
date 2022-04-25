@@ -2,6 +2,7 @@ import { CdkDragDrop, CdkDragSortEvent, CdkDropList } from '@angular/cdk/drag-dr
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IListItem, IList, IDnDTransfer } from 'src/app/models.interface';
+import { LoggerService } from 'src/app/providers/common/logger.service';
 import { DataCentralService } from 'src/app/providers/core/data-central.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class ListComponent implements OnInit {
     name: 'Unnamed'
   };
 
-  constructor(private _central: DataCentralService) { }
+  constructor(private _central: DataCentralService, private _logger: LoggerService) { }
 
   ngOnInit(): void {}
 
@@ -35,7 +36,7 @@ export class ListComponent implements OnInit {
 
     this.todoList.items = newItems;
     this._central.updateList(this.todoList);
-    console.log(event, this.todoList.items);
+    this._logger.text(event, this.todoList.items);
   }
 
   public transferItem(event: CdkDragDrop<IList>) {

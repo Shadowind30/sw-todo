@@ -1,15 +1,22 @@
-<div class="todo-container">
-  <h1>{{todoList.name}}</h1>
-  <button [routerLink]="['/add-task', todoList.id, 'new']">Add new Task</button>
-  <div class="todo-list">
-    <ul cdkDropList [cdkDropListData]="todoList" (cdkDropListDropped)="handleDnD($event)">
-      <li cdkDrag [cdkDragData]="item" *ngFor="let item of todoList.items">{{item.task}}
-        <button [routerLink]="['/add-task', todoList.id, item.id]">Edit</button>
-        <button (click)="removeTask(item.id)">Delete</button>
-      </li>
-      <div *ngIf="todoList.items.length === 0">
+<div class="list-container">
+  <div class="list-header">
+    <h1>{{todoList.name}}</h1>
+    <button mat-raised-button color="primary" [routerLink]="['/add-task', todoList.id, 'new']">Add new Task</button>
+  </div>
+  <div class="list-items" cdkDropList [cdkDropListData]="todoList" (cdkDropListDropped)="handleDnD($event)">
+      <mat-card style="display: flex;justify-content: space-between; align-items: center;" class="item" cdkDrag [cdkDragData]="item" *ngFor="let item of todoList.items">
+        <p>{{item.task}}</p>
+        <div class="option">
+          <button color="accent" mat-icon-button [routerLink]="['/add-task', todoList.id, item.id]">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button color="warn" mat-icon-button (click)="removeTask(item.id)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </mat-card>
+      <div class="no-items" *ngIf="todoList.items.length === 0">
         No Items yet, add one pressing the button above
       </div>
-    </ul>
   </div>
 </div>

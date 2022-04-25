@@ -1,0 +1,12 @@
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  div {
+    background: #eee;
+    padding: 5rem;
+    border-radius: 1em;
+  }
+}

@@ -1,0 +1,38 @@
+div.list-container {
+  background: #eee;
+  padding: 1rem;
+
+  div.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  div.list-items {
+
+    mat-card {
+      margin: 0.5rem auto;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    div.no-items {
+      margin:  2rem auto 1rem auto;
+      text-align: center;
+    }
+
+    &.cdk-drop-list-dragging {
+      div.no-items {
+        display: none;
+      }
+    }
+
+    &.cdk-drop-list-dragging .cdk-drag {
+      transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    &.cdk-drag-animating {
+      transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+    }
+  }
+}

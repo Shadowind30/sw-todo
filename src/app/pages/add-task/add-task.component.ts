@@ -13,6 +13,8 @@ export class AddTaskComponent implements OnInit {
   private listId: number = 0;
   private id: string = 'new';
 
+  public buttonText: 'Add' | 'Update' = 'Add';
+
   public addTaskForm = this.fb.group({
     task: ['', [Validators.required, Validators.minLength(3)]],
   });
@@ -31,6 +33,7 @@ export class AddTaskComponent implements OnInit {
     if (this.listId > 0 && this.id !== 'new') {
       const task = this._central.getTask(this.id, this.listId).task;
       this.task?.setValue(task);
+      this.buttonText = 'Update';
     }
   }
 

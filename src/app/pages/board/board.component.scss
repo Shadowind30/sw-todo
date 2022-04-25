@@ -1,0 +1,9 @@
+div.board {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  app-list {
+    min-width: 30%;
+  }
+}

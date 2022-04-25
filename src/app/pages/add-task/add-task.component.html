@@ -1,4 +1,11 @@
-<form (submit)="handleSubmit()" [formGroup]="addTaskForm">
-  <input placeholder="Add a task" formControlName="task"/>
-  <button [disabled]="!addTaskForm.valid" type="submit">Submit</button>
-</form>
+<div>
+  <div>
+    <mat-form-field [formGroup]="addTaskForm">
+      <input matInput placeholder="Add a task" formControlName="task"/>
+    </mat-form-field>
+    <button (click)="handleSubmit()" color="primary" mat-raised-button [disabled]="!addTaskForm.valid" type="submit">
+      {{buttonText}}
+      <mat-icon>{{buttonText === 'Add' ? 'add' : 'edit'}}</mat-icon>
+    </button>
+  </div>
+</div>

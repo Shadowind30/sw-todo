@@ -1,7 +1,7 @@
-<nav>
-  <button routerLink="/board" routerLinkActive #rla="routerLinkActive" [disabled]="rla.isActive" >Back</button>
-  <h1>SW TODO</h1>
-</nav>
+<mat-toolbar color="primary">
+  <button mat-raised-button routerLink="/board" routerLinkActive="hide-btn" #rla="routerLinkActive" [disabled]="rla.isActive" >Back</button>
+  <h1 class="title">SW TODO</h1>
+</mat-toolbar>
 
 <div class="container">
   <router-outlet></router-outlet>

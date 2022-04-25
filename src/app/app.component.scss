@@ -1,0 +1,10 @@
+mat-toolbar {
+
+  button {
+    margin-right: 1rem;
+  }
+  button.hide-btn {
+    display: none;
+    visibility: hidden;
+  }
+}
