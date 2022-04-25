@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ITodoItem } from './models.interface';
+import { IListItem } from './models.interface';
 import { LocalDbService } from './providers/external/local-db.service';
 @Component({
   selector: 'app-root',

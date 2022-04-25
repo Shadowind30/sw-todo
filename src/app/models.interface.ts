@@ -1,10 +1,17 @@
-export interface ITodoItem {
-  id: number;
+export interface IListItem {
+  id: string;
   task: string;
 }
 
-export interface ITodoList {
+export interface IList {
   id: number;
-  items: ITodoItem[];
+  items: IListItem[];
   name: string;
+}
+
+export interface IDnDTransfer {
+  item: IListItem,
+  containerId: number;
+  previousContainerId: number;
+  currentIndex: number;
 }

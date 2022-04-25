@@ -1,15 +1,15 @@
 <div class="todo-container">
   <h1>{{todoList.name}}</h1>
-  <button [routerLink]="['/add-task', todoList.id, 0]">Add new Task</button>
+  <button [routerLink]="['/add-task', todoList.id, 'new']">Add new Task</button>
   <div class="todo-list">
-    <ul *ngIf="todoList.items.length; else noItems">
-      <li *ngFor="let item of todoList.items">{{item.task}}
+    <ul cdkDropList [cdkDropListData]="todoList" (cdkDropListDropped)="handleDnD($event)">
+      <li cdkDrag [cdkDragData]="item" *ngFor="let item of todoList.items">{{item.task}}
         <button [routerLink]="['/add-task', todoList.id, item.id]">Edit</button>
         <button (click)="removeTask(item.id)">Delete</button>
       </li>
+      <div *ngIf="todoList.items.length === 0">
+        No Items yet, add one pressing the button above
+      </div>
     </ul>
-    <ng-template #noItems>
-      No Items yet, add one pressing the button above
-    </ng-template>
   </div>
 </div>

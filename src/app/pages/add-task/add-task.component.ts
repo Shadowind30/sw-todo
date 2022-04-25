@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataCentralService } from 'src/app/providers/core/data-central.service';
-
+import * as uuid from 'uuid';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -10,8 +10,8 @@ import { DataCentralService } from 'src/app/providers/core/data-central.service'
 })
 export class AddTaskComponent implements OnInit {
 
-  private listId = 0;
-  private id = 0;
+  private listId: number = 0;
+  private id: string = 'new';
 
   public addTaskForm = this.fb.group({
     task: ['', [Validators.required, Validators.minLength(3)]],
@@ -26,16 +26,16 @@ export class AddTaskComponent implements OnInit {
 
   ngOnInit(): void {
     this.listId = +this.route.snapshot.params['listId'] || 0;
-    this.id = +this.route.snapshot.params['id'] || 0;
+    this.id = this.route.snapshot.params['id'] || 'new';
 
-    if (this.listId > 0 && this.id > 0) {
+    if (this.listId > 0 && this.id !== 'new') {
       const task = this._central.getTask(this.id, this.listId).task;
       this.task?.setValue(task);
     }
   }
 
   public handleSubmit() {
-    this.id === 0 ? this.addTask() : this.updateTask();
+    this.id === 'new' ? this.addTask() : this.updateTask();
   }
 
   public addTask() {
@@ -57,7 +57,7 @@ export class AddTaskComponent implements OnInit {
   }
 
   private getId() {
-    return this._central.getTasksAmount(this.listId) + 1;
+    return uuid.v4();
   }
 
   private navigateHome() {

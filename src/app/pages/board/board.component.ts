@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ITodoList } from 'src/app/models.interface';
+import { IList } from 'src/app/models.interface';
 import { DataCentralService } from 'src/app/providers/core/data-central.service';
 
 @Component({
@@ -10,11 +10,11 @@ import { DataCentralService } from 'src/app/providers/core/data-central.service'
 })
 export class BoardComponent implements OnInit {
 
-  public todoLists$ = new Observable<ITodoList[]>();
+  public lists$ = new Observable<IList[]>();
   constructor(private _central: DataCentralService) { }
 
   ngOnInit(): void {
-    this.todoLists$ = this._central.todos$;
+    this.lists$ = this._central.lists$;
   }
 
 }
