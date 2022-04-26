@@ -1,6 +1,7 @@
 div.list-container {
   background: #eee;
   padding: 1rem;
+  border-radius: 1em;
 
   div.list-header {
     display: flex;
@@ -14,6 +15,15 @@ div.list-container {
       margin: 0.5rem auto;
       justify-content: space-between;
       align-items: center;
+    }
+
+    mat-card.cdk-drag-placeholder {
+      background-color: #fff3;
+      color: #fff3;
+      border: #555 2px dashed;
+      button {
+        display: none;
+      }
     }
 
     div.no-items {
